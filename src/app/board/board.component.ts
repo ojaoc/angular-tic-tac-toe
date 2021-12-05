@@ -59,9 +59,7 @@ export class BoardComponent implements OnInit {
   }
 
   get isGameOver() {
-    return (
-      this.winner !== null || this.squares.every((square) => square !== null)
-    );
+    return this.winner !== null;
   }
 
   get player() {
