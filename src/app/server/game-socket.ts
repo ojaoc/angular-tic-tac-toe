@@ -30,6 +30,7 @@ export class GameSocket {
       });
       if (existingRoom) {
         existingRoom.id = room.id;
+        existingRoom.isFull = room.isFull;
       }
     });
 

@@ -1,7 +1,7 @@
 <main>
   <div id="card-grid">
     <app-game-card
-      *ngFor="let room of rooms"
+      *ngFor="let room of gameSocket.rooms"
       [isFull]="room.isFull"
       [name]="room.id"
     ></app-game-card>
