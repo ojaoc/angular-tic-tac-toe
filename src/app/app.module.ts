@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { GamesComponent } from './games/games.component';
 import { HomeComponent } from './home/home.component';
 import { GameCardComponent } from './game-card/game-card.component';
+import { GameSocket } from './server/game-socket';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { GameCardComponent } from './game-card/game-card.component';
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [],
+  providers: [GameSocket],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

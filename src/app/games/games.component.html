@@ -1,11 +1,9 @@
 <main>
   <div id="card-grid">
-    <app-game-card [isFull]="false" name="Swag"></app-game-card>
-    <app-game-card [isFull]="true" name="Swag"></app-game-card>
-    <app-game-card [isFull]="true" name="Swag"></app-game-card>
-    <app-game-card [isFull]="true" name="Swag"></app-game-card>
-    <app-game-card [isFull]="true" name="Swag"></app-game-card>
-    <app-game-card [isFull]="true" name="Swag"></app-game-card>
-    <app-game-card [isFull]="true" name="Swag"></app-game-card>
+    <app-game-card
+      *ngFor="let room of rooms"
+      [isFull]="room.isFull"
+      [name]="room.id"
+    ></app-game-card>
   </div>
 </main>
