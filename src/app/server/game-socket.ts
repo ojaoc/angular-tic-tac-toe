@@ -9,15 +9,19 @@ export interface Room {
 export class GameSocket {
   private _socket: Socket;
   private _rooms: Room[] = [];
+  private _joinedRoom: Room;
 
   constructor() {
     this._socket = io(environment.serverUrl);
 
     this._socket.on('connect', () => {
       this._socket.emit('room:list', (res: any) => {
-        console.log(res);
         this._rooms = res;
       });
+    });
+
+    this._socket.on('room:left', () => {
+      this._joinedRoom = null;
     });
 
     this._socket.on('room:created', (room) => {
@@ -46,5 +50,13 @@ export class GameSocket {
 
   public get rooms() {
     return this._rooms;
+  }
+
+  public joinRoom(roomId?: string): Room {
+    this._socket.emit('room:join', roomId, (roomObj: Room) => {
+      this._joinedRoom = roomObj;
+    });
+
+    return this._joinedRoom;
   }
 }

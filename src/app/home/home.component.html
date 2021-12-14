@@ -1,5 +1,5 @@
 <h3>Tic-tac-toe</h3>
 <div id="button-container">
-  <button nbButton status="primary" [routerLink]="['/games']">New Game</button>
+  <button nbButton status="primary" (click)="handleNewGame()">New Game</button>
   <button nbButton status="basic" [routerLink]="['/games']">Rooms</button>
 </div>
