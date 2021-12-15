@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  handleNewGame() {
-    const { id }: Room = this.gameSocket.joinRoom();
+  async handleNewGame() {
+    const { id }: Room = await this.gameSocket.joinRoom();
     this._route.navigateByUrl(`/games/${id}`);
   }
 }

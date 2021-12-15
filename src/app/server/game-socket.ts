@@ -1,5 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 import { environment } from 'src/environments/environment';
+import { asyncEmit } from './events';
 
 export interface Room {
   id: string;
@@ -52,10 +53,19 @@ export class GameSocket {
     return this._rooms;
   }
 
-  public joinRoom(roomId?: string): Room {
-    this._socket.emit('room:join', roomId, (roomObj: Room) => {
-      this._joinedRoom = roomObj;
-    });
+  public async joinRoom(roomId?: string): Promise<Room> {
+    // We are using asyncEmit here because, if we don't, the function
+    // will be returned before the callback is called in the server
+    try {
+      await asyncEmit(this._socket, 'room:join', [
+        roomId,
+        (roomObj: Room) => {
+          this._joinedRoom = roomObj;
+        },
+      ]);
+    } catch (err) {
+      console.log(err);
+    }
 
     return this._joinedRoom;
   }
